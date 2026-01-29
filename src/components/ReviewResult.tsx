@@ -14,7 +14,6 @@ interface ReviewResultProps {
 export function ReviewResult({ data }: ReviewResultProps) {
   return (
     <div className="w-full max-w-4xl mx-auto mt-12 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      {/* Score Section */}
       <div className="flex flex-col md:flex-row items-center gap-8 bg-white/5 border border-white/10 rounded-2xl p-8">
         <div className="relative w-32 h-32 flex items-center justify-center">
           <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
@@ -44,7 +43,6 @@ export function ReviewResult({ data }: ReviewResultProps) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Strengths */}
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
           <h3 className="flex items-center gap-2 text-lg font-semibold text-white mb-4">
             <CheckCircle2 className="w-5 h-5 text-emerald-500" />
@@ -60,7 +58,6 @@ export function ReviewResult({ data }: ReviewResultProps) {
           </ul>
         </div>
 
-        {/* Improvements */}
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
           <h3 className="flex items-center gap-2 text-lg font-semibold text-white mb-4">
             <XCircle className="w-5 h-5 text-red-500" />
@@ -76,7 +73,6 @@ export function ReviewResult({ data }: ReviewResultProps) {
           </ul>
         </div>
 
-        {/* Action Items */}
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:col-span-2">
           <h3 className="flex items-center gap-2 text-lg font-semibold text-white mb-4">
             <Target className="w-5 h-5 text-blue-500" />
@@ -96,4 +92,4 @@ export function ReviewResult({ data }: ReviewResultProps) {
       </div>
     </div>
   );
-}
+};

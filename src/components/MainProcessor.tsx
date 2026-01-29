@@ -28,13 +28,16 @@ export function MainProcessor() {
         body: formData,
       });
 
-      if (!res.ok) throw new Error("Analysis failed");
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || `Analysis failed with status ${res.status}`);
+      }
 
       const json = await res.json();
       setResult(json);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      alert("Something went wrong. Please check your API key and try again.");
+      alert(error.message || "Something went wrong. Please check your API key and try again.");
     } finally {
       setIsLoading(false);
     }
