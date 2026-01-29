@@ -1,26 +1,116 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #050505;
-  --foreground: #ededed;
+  --background: oklch(.12 .01 250);
+  --foreground: oklch(.95 .01 250);
+  --card: oklch(.16 .015 250);
+  --card-foreground: oklch(.95 .01 250);
+  --popover: oklch(.16 .015 250);
+  --popover-foreground: oklch(.95 .01 250);
+  --primary: #00b79c;
+  --primary-foreground: oklch(.12 .01 250);
+  --secondary: oklch(.22 .02 250);
+  --secondary-foreground: oklch(.85 .01 250);
+  --muted: oklch(.22 .02 250);
+  --muted-foreground: oklch(.6 .02 250);
+  --accent: oklch(.68 .16 180);
+  --accent-foreground: oklch(.12 .01 250);
+  --destructive: oklch(.577 .245 27.325);
+  --destructive-foreground: oklch(.95 .01 250);
+  --border: oklch(.28 .02 250);
+  --input: oklch(.22 .02 250);
+  --ring: oklch(.68 .16 180);
+  --chart-1: oklch(.68 .16 180);
+  --chart-2: oklch(.75 .12 150);
+  --chart-3: oklch(.65 .1 200);
+  --chart-4: oklch(.8 .15 160);
+  --chart-5: oklch(.7 .14 190);
+  --radius: .75rem;
+  --sidebar: oklch(.14 .015 250);
+  --sidebar-foreground: oklch(.95 .01 250);
+  --sidebar-primary: oklch(.68 .16 180);
+  --sidebar-primary-foreground: oklch(.12 .01 250);
+  --sidebar-accent: oklch(.22 .02 250);
+  --sidebar-accent-foreground: oklch(.95 .01 250);
+  --sidebar-border: oklch(.28 .02 250);
+  --sidebar-ring: oklch(.68 .16 180);
+}
 
-  --primary: #10b981;
-  --primary-foreground: #ffffff;
+.dark {
+  --background: oklch(.12 .01 250);
+  --foreground: oklch(.95 .01 250);
+  --card: oklch(.16 .015 250);
+  --card-foreground: oklch(.95 .01 250);
+  --popover: oklch(.16 .015 250);
+  --popover-foreground: oklch(.95 .01 250);
+  --primary: #00b79c;
+  --primary-foreground: oklch(.12 .01 250);
+  --secondary: oklch(.22 .02 250);
+  --secondary-foreground: oklch(.85 .01 250);
+  --muted: oklch(.22 .02 250);
+  --muted-foreground: oklch(.6 .02 250);
+  --accent: oklch(.68 .16 180);
+  --accent-foreground: oklch(.12 .01 250);
+  --destructive: oklch(.577 .245 27.325);
+  --destructive-foreground: oklch(.95 .01 250);
+  --border: oklch(.28 .02 250);
+  --input: oklch(.22 .02 250);
+  --ring: oklch(.68 .16 180);
+  --chart-1: oklch(.68 .16 180);
+  --chart-2: oklch(.75 .12 150);
+  --chart-3: oklch(.65 .1 200);
+  --chart-4: oklch(.8 .15 160);
+  --chart-5: oklch(.7 .14 190);
+  --radius: .75rem;
+  --sidebar: oklch(.14 .015 250);
+  --sidebar-foreground: oklch(.95 .01 250);
+  --sidebar-primary: oklch(.68 .16 180);
+  --sidebar-primary-foreground: oklch(.12 .01 250);
+  --sidebar-accent: oklch(.22 .02 250);
+  --sidebar-accent-foreground: oklch(.95 .01 250);
+  --sidebar-border: oklch(.28 .02 250);
+  --sidebar-ring: oklch(.68 .16 180);
+}
 
-  --secondary: #1f2937;
-  --secondary-foreground: #ffffff;
-
-  --muted: #262626;
-  --muted-foreground: #a3a3a3;
-
-  --border: #262626;
-  --input: #262626;
-  --ring: #10b981;
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius: var(--radius);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
 
