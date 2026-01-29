@@ -4,6 +4,26 @@ import mammoth from "mammoth";
 
 export const runtime = "nodejs";
 
+if (typeof global.DOMMatrix === 'undefined') {
+  // @ts-ignore
+  global.DOMMatrix = class DOMMatrix {
+    a: number;
+    b: number;
+    c: number;
+    d: number;
+    e: number;
+    f: number;
+    constructor() {
+      this.a = 1; this.b = 0; this.c = 0; this.d = 1; this.e = 0; this.f = 0;
+    }
+    setMatrixValue() { return this; }
+    translate() { return this; }
+    scale() { return this; }
+    rotate() { return this; }
+    multiply() { return this; }
+  }
+}
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "dummy",
 });
@@ -33,7 +53,31 @@ export async function POST(req: NextRequest) {
       const buffer = Buffer.from(await file.arrayBuffer());
 
       if (file.type === "application/pdf") {
-        content = "Note: PDF parsing is currently undergoing maintenance. Please copy-paste text or use DOCX/TXT.";
+        try {
+          const pdfNamespace = await import("pdf-parse");
+          // @ts-ignore
+          let PDFParseClass = pdfNamespace.default || pdfNamespace;
+
+          if (typeof PDFParseClass !== "function" && typeof PDFParseClass.PDFParse === "function") {
+            PDFParseClass = PDFParseClass.PDFParse;
+          }
+
+          if (typeof PDFParseClass !== "function") {
+            const keys = typeof PDFParseClass === 'object' ? Object.keys(PDFParseClass).join(', ') : 'not-object';
+            throw new Error(`Expected PDFParse class but got ${typeof PDFParseClass} with keys: [${keys}]`);
+          }
+
+          // @ts-ignore
+          const parser = new PDFParseClass({ data: buffer });
+          const data = await parser.getText();
+          content = data.text;
+        } catch (e: any) {
+          console.error("PDF parse error:", e);
+          return NextResponse.json(
+            { error: `Failed to parse PDF: ${e.message}` },
+            { status: 400 }
+          );
+        }
       } else if (
         file.type ===
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -78,10 +122,10 @@ export async function POST(req: NextRequest) {
     const result = JSON.parse(responseContent || "{}");
 
     return NextResponse.json(result);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error processing request:", error);
     return NextResponse.json(
-      { error: "Failed to process request" },
+      { error: error.message || "Failed to process request" },
       { status: 500 }
     );
   }
