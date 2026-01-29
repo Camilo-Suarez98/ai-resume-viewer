@@ -2,9 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import mammoth from "mammoth";
 
-// We'll skip complex PDF parsing for now to ensure stable builds in this environment. 
-// A robust solution would use a dedicated service or a more build-friendly library.
-
 export const runtime = "nodejs";
 
 const openai = new OpenAI({
@@ -36,8 +33,6 @@ export async function POST(req: NextRequest) {
       const buffer = Buffer.from(await file.arrayBuffer());
 
       if (file.type === "application/pdf") {
-        // Placeholder for PDF logic to avoid build complications with pdf-parse in some envs
-        // If you need PDF support, uncomment the pdf-parse import and logic, or use a library like 'pdf.js-extract'
         content = "Note: PDF parsing is currently undergoing maintenance. Please copy-paste text or use DOCX/TXT.";
       } else if (
         file.type ===
@@ -46,7 +41,6 @@ export async function POST(req: NextRequest) {
         const result = await mammoth.extractRawText({ buffer });
         content = result.value;
       } else {
-        // Assume text/md
         content = buffer.toString("utf-8");
       }
     }
@@ -76,7 +70,7 @@ export async function POST(req: NextRequest) {
 
     const completion = await openai.chat.completions.create({
       messages: [{ role: "system", content: "You are a helpful assistant." }, { role: "user", content: prompt }],
-      model: "gpt-4-turbo-preview", // Or gpt-3.5-turbo if preferred
+      model: "gpt-4-turbo-preview",
       response_format: { type: "json_object" },
     });
 
