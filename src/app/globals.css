@@ -110,10 +110,6 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer utilities {
   .text-gradient {
     background-clip: text;
