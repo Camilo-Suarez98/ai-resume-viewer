@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Upload, FileText, Loader2, Sparkles } from "lucide-react";
 import { useDropzone } from "react-dropzone";
 import { cn } from "@/lib/utils";
+import { SecondSelectorButton } from "./ui/SecondSelectorButton";
 
 interface ReviewFormProps {
   type: "resume" | "portfolio";
@@ -43,34 +44,21 @@ export function ReviewForm({ type, onSubmit, isLoading }: ReviewFormProps) {
 
   return (
     <div className="w-full max-w-3xl mx-auto mt-8">
-      {/* Input Type Toggles */}
       <div className="flex items-center gap-1 p-1 bg-white/5 rounded-t-xl w-fit mx-auto sm:mx-0 sm:ml-4 translate-y-2 relative z-10">
-        <button
+        <SecondSelectorButton
+          isActive={mode === "text"}
           onClick={() => setMode("text")}
-          className={cn(
-            "px-4 py-2 text-sm font-medium rounded-lg transition-all",
-            mode === "text"
-              ? "bg-gradient-primary text-white shadow-lg"
-              : "text-muted-foreground hover:text-white"
-          )}
-        >
-          Paste Text
-        </button>
-        <button
+          label="Paste Text"
+        />
+        <SecondSelectorButton
+          isActive={mode === "file"}
           onClick={() => setMode("file")}
-          className={cn(
-            "px-4 py-2 text-sm font-medium rounded-lg transition-all",
-            mode === "file"
-              ? "bg-gradient-primary text-white shadow-lg"
-              : "text-muted-foreground hover:text-white"
-          )}
-        >
-          Upload File
-        </button>
+          label="Upload File"
+        />
       </div>
 
       <div className="bg-[#111111] border border-white/10 rounded-2xl p-6 shadow-2xl relative overflow-hidden group">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-purple-500/5 pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-br from-emerald-500/5 to-purple-500/5 pointer-events-none" />
 
         <AnimatePresence mode="wait">
           {mode === "text" ? (
