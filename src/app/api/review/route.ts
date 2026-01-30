@@ -54,27 +54,29 @@ export async function POST(req: NextRequest) {
 
       if (file.type === "application/pdf") {
         try {
-          const pdfNamespace = await import("pdf-parse");
-          // @ts-ignore
-          let PDFParseClass = pdfNamespace.default || pdfNamespace;
+          const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
+          pdfjsLib.GlobalWorkerOptions.workerSrc = "";
 
-          if (typeof PDFParseClass !== "function" && typeof PDFParseClass.PDFParse === "function") {
-            PDFParseClass = PDFParseClass.PDFParse;
-          }
-
-          if (typeof PDFParseClass !== "function") {
-            const keys = typeof PDFParseClass === 'object' ? Object.keys(PDFParseClass).join(', ') : 'not-object';
-            throw new Error(`Expected PDFParse class but got ${typeof PDFParseClass} with keys: [${keys}]`);
-          }
-
-          const parser = new PDFParseClass({
-            data: buffer,
+          const loadingTask = pdfjsLib.getDocument({
+            data: new Uint8Array(buffer),
             useWorkerFetch: false,
             isEvalSupported: false,
-            disableFontFace: true,
+            useSystemFonts: true,
           });
-          const data = await parser.getText();
-          content = data.text;
+
+          const pdfDoc = await loadingTask.promise;
+          const textParts: string[] = [];
+
+          for (let i = 1; i <= pdfDoc.numPages; i++) {
+            const page = await pdfDoc.getPage(i);
+            const textContent = await page.getTextContent();
+            const pageText = textContent.items
+              .map((item: any) => item.str)
+              .join(" ");
+            textParts.push(pageText);
+          }
+
+          content = textParts.join("\n\n");
         } catch (e: any) {
           console.error("PDF parse error:", e);
           return NextResponse.json(
