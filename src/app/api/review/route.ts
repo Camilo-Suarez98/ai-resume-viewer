@@ -67,8 +67,12 @@ export async function POST(req: NextRequest) {
             throw new Error(`Expected PDFParse class but got ${typeof PDFParseClass} with keys: [${keys}]`);
           }
 
-          // @ts-ignore
-          const parser = new PDFParseClass({ data: buffer });
+          const parser = new PDFParseClass({
+            data: buffer,
+            useWorkerFetch: false,
+            isEvalSupported: false,
+            disableFontFace: true,
+          });
           const data = await parser.getText();
           content = data.text;
         } catch (e: any) {
