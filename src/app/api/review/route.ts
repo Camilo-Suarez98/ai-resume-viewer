@@ -55,14 +55,15 @@ export async function POST(req: NextRequest) {
       if (file.type === "application/pdf") {
         try {
           const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
-          pdfjsLib.GlobalWorkerOptions.workerSrc = "";
+          pdfjsLib.GlobalWorkerOptions.workerSrc = "data:text/javascript,";
 
           const loadingTask = pdfjsLib.getDocument({
             data: new Uint8Array(buffer),
+            disableWorker: true,
             useWorkerFetch: false,
             isEvalSupported: false,
             useSystemFonts: true,
-          });
+          } as any);
 
           const pdfDoc = await loadingTask.promise;
           const textParts: string[] = [];
