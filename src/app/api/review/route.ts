@@ -54,30 +54,9 @@ export async function POST(req: NextRequest) {
 
       if (file.type === "application/pdf") {
         try {
-          const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
-          pdfjsLib.GlobalWorkerOptions.workerSrc = "data:text/javascript,";
-
-          const loadingTask = pdfjsLib.getDocument({
-            data: new Uint8Array(buffer),
-            disableWorker: true,
-            useWorkerFetch: false,
-            isEvalSupported: false,
-            useSystemFonts: true,
-          } as any);
-
-          const pdfDoc = await loadingTask.promise;
-          const textParts: string[] = [];
-
-          for (let i = 1; i <= pdfDoc.numPages; i++) {
-            const page = await pdfDoc.getPage(i);
-            const textContent = await page.getTextContent();
-            const pageText = textContent.items
-              .map((item: any) => item.str)
-              .join(" ");
-            textParts.push(pageText);
-          }
-
-          content = textParts.join("\n\n");
+          const { extractText } = await import("unpdf");
+          const result = await extractText(new Uint8Array(buffer));
+          content = Array.isArray(result.text) ? result.text.join("\n\n") : result.text;
         } catch (e: any) {
           console.error("PDF parse error:", e);
           return NextResponse.json(
