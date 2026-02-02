@@ -101,7 +101,7 @@ export function ReviewForm({ type, onSubmit, isLoading }: ReviewFormProps) {
                   <div className="text-center">
                     <FileText className="w-12 h-12 text-primary mx-auto mb-4" />
                     <p className="text-white font-medium">{file.name}</p>
-                    <p className="text-xs text-neutral-500 mt-2">
+                    <p className="text-xs text-neutral-300 mt-2">
                       Click or drag to replace
                     </p>
                   </div>
