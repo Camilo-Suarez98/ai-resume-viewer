@@ -108,10 +108,10 @@ export function ReviewForm({ type, onSubmit, isLoading }: ReviewFormProps) {
                 ) : (
                   <div className="text-center p-6">
                     <Upload className="w-12 h-12 text-primary bg-primary/10 rounded-full p-2 mx-auto mb-4" />
-                    <p className="text-neutral-300 font-medium">
+                    <p className="text-neutral-200 font-medium">
                       Drag & drop your file here
                     </p>
-                    <p className="text-xs text-neutral-500 mt-2">
+                    <p className="text-xs text-neutral-300 mt-2">
                       PDF, DOCX, TXT, MD
                     </p>
                   </div>
