@@ -4,7 +4,7 @@ import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Upload, FileText, Loader2, Sparkles } from "lucide-react";
 import { useDropzone } from "react-dropzone";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/cn";
 import { SecondSelectorButton } from "./ui/SecondSelectorButton";
 
 interface ReviewFormProps {
