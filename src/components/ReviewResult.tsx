@@ -1,15 +1,6 @@
 import { CheckCircle2, XCircle, Lightbulb, Target } from "lucide-react";
-
-interface ReviewResultProps {
-  data: {
-    score: number;
-    summary: string;
-    strengths: string[];
-    weaknesses: string[];
-    actionItems: string[];
-    keywords: string[];
-  };
-}
+import { ReviewResultProps } from "@/lib/types/ReviewResults.type";
+import { ReviewResultSquare } from "./ui/ReviewResultSquare";
 
 export function ReviewResult({ data }: ReviewResultProps) {
   return (
@@ -43,35 +34,19 @@ export function ReviewResult({ data }: ReviewResultProps) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 className="flex items-center gap-2 text-lg font-semibold text-white mb-4">
-            <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-            Strengths
-          </h3>
-          <ul className="space-y-3">
-            {data.strengths.map((item, i) => (
-              <li key={i} className="flex gap-3 text-neutral-300 text-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ReviewResultSquare
+          data={data.strengths}
+          Icon={CheckCircle2}
+          title="Strengths"
+          color="emerald"
+        />
 
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 className="flex items-center gap-2 text-lg font-semibold text-white mb-4">
-            <XCircle className="w-5 h-5 text-red-500" />
-            Areas for Improvement
-          </h3>
-          <ul className="space-y-3">
-            {data.weaknesses.map((item, i) => (
-              <li key={i} className="flex gap-3 text-neutral-300 text-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 shrink-0" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ReviewResultSquare
+          data={data.weaknesses}
+          Icon={XCircle}
+          title="Areas for Improvement"
+          color="red"
+        />
 
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:col-span-2">
           <h3 className="flex items-center gap-2 text-lg font-semibold text-white mb-4">
