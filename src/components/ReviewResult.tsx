@@ -24,7 +24,7 @@ export function ReviewResult({ data }: ReviewResultProps) {
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <span className="text-3xl font-bold text-white">{data.score}</span>
-            <span className="text-xs text-neutral-400">Score</span>
+            <span className="text-xs text-neutral-300">Score</span>
           </div>
         </div>
         <div className="flex-1">
@@ -38,26 +38,24 @@ export function ReviewResult({ data }: ReviewResultProps) {
           data={data.strengths}
           Icon={CheckCircle2}
           title="Strengths"
-          color="emerald"
         />
 
         <ReviewResultSquare
           data={data.weaknesses}
           Icon={XCircle}
           title="Areas for Improvement"
-          color="red"
         />
 
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:col-span-2">
           <h3 className="flex items-center gap-2 text-lg font-semibold text-white mb-4">
-            <Target className="w-5 h-5 text-blue-500" />
+            <Target className="w-5 h-5 text-blue-400" />
             Action Plan
           </h3>
           <div className="grid md:grid-cols-2 gap-4">
             {data.actionItems.map((item, i) => (
               <div key={i} className="flex gap-3 bg-white/5 p-4 rounded-xl border border-white/5">
-                <div className="bg-blue-500/10 p-2 rounded-lg h-fit">
-                  <Lightbulb className="w-4 h-4 text-blue-400" />
+                <div className="bg-blue-500/5 p-2 rounded-lg h-fit">
+                  <Lightbulb className="w-4 h-4 text-blue-300" />
                 </div>
                 <p className="text-sm text-neutral-300">{item}</p>
               </div>

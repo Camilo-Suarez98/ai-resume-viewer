@@ -15,5 +15,4 @@ export interface ReviewResultSquareProps {
   data: string[];
   Icon: LucideIcon;
   title: string;
-  color: string;
 }
