@@ -11,7 +11,7 @@ export function FeatureGrid() {
           <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-primary">
             <feature.icon className="w-6 h-6" />
           </div>
-          <h3 className="text-white font-semibold mb-2">{feature.title}</h3>
+          <h2 className="text-white font-semibold mb-2">{feature.title}</h2>
           <p className="text-sm text-neutral-400">{feature.description}</p>
         </div>
       ))}
