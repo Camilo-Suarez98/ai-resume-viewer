@@ -4,4 +4,9 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ["pdf-parse", "pdfjs-dist", "@napi-rs/canvas"],
 };
 
-export default nextConfig;
+module.exports = {
+  nextConfig,
+  experimental: {
+    optimizePackageImports: ['lucide-react'],
+  },
+}
