@@ -14,7 +14,7 @@ interface ReviewFormProps {
 }
 
 export function ReviewForm({ type, onSubmit, isLoading }: ReviewFormProps) {
-  const [mode, setMode] = useState<"text" | "file">("text");
+  const [mode, setMode] = useState<"text" | "file">("file");
   const [text, setText] = useState("");
   const [file, setFile] = useState<File | null>(null);
 
@@ -47,14 +47,14 @@ export function ReviewForm({ type, onSubmit, isLoading }: ReviewFormProps) {
       <div className="bg-card border border-white/10 rounded-2xl p-6 shadow-2xl relative overflow-hidden group">
         <div className="flex items-center gap-2 w-full mx-auto translate-y-2 mb-6">
           <SecondSelectorButton
-            isActive={mode === "text"}
-            onClick={() => setMode("text")}
-            label="Paste Text"
-          />
-          <SecondSelectorButton
             isActive={mode === "file"}
             onClick={() => setMode("file")}
             label="Upload File"
+          />
+          <SecondSelectorButton
+            isActive={mode === "text"}
+            onClick={() => setMode("text")}
+            label="Paste Text"
           />
         </div>
 

@@ -100,7 +100,7 @@ export async function POST(req: NextRequest) {
 
     const completion = await openai.chat.completions.create({
       messages: [{ role: "system", content: "You are a helpful assistant." }, { role: "user", content: prompt }],
-      model: "gpt-4-turbo-preview",
+      model: "gpt-5.4-mini",
       response_format: { type: "json_object" },
     });
 
@@ -115,4 +115,4 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
-}
+};

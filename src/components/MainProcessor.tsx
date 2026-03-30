@@ -44,25 +44,9 @@ export function MainProcessor() {
   };
 
   return (
-    <div className="flex flex-col items-center w-full max-w-6xl mx-auto px-4 py-12">
-      <div className="flex items-center gap-2 p-1 rounded-xl mb-10">
-        <SelectorButton
-          isActive={type === "resume"}
-          onClick={() => setType("resume")}
-          icon={FileText}
-          label="Resume"
-        />
-        <SelectorButton
-          isActive={type === "portfolio"}
-          onClick={() => setType("portfolio")}
-          icon={Briefcase}
-          label="Portfolio"
-        />
-      </div>
-
+    <div className="flex flex-col items-center w-full max-w-6xl mx-auto px-4">
       <ReviewForm type={type} onSubmit={handleSubmit} isLoading={isLoading} />
-
       {result ? <ReviewResult data={result} /> : <FeatureGrid />}
     </div>
   );
-}
+};
